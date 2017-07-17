@@ -4,7 +4,7 @@
 
 2. Olvida lo que sabes de Angularjs (Angular 1.x)
 
-![alt text](src/assets/img/200w_d.gif)
+![alt text](src/assets/img/forget.gif)
 
 
 
