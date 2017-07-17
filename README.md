@@ -2,30 +2,17 @@
 
 1. Olvida lo que sabes de Angularjs (Angular 1.x)
 
-Reference-style:
-![alt text][forget.gif]
-
-Reference-style:
-![alt text][/src/assets/img/forget.gif]
-
-
-Inline-style:
-![alt text](https://gitlab.com/angie-clau/taller-vp/tree/feature/taller/src/assets/img/forget.gif)
-
-
-Reference-style:
-![alt text][taller-vp.JPG]
-
-Reference-style:
-![alt text][/src/assets/img/taller-vp.JPG]
-
-
-Inline-style:
-![alt text](https://gitlab.com/angie-clau/taller-vp/tree/feature/taller/src/assets/img/taller-vp.JPG)
-
+![alt text](https://github.com/angie-clau/taller-vp/tree/master/src/assets/img/200w_d.gif)
 
 
 2. Angular y React son muy diferentes
+
+
+
+# Nuestra super app
+
+![alt text](https://github.com/angie-clau/taller-vp/tree/master/src/assets/img/taller-vp.JPG)
+
 
 
 # Fundamentos Angular
