@@ -1,9 +1,12 @@
 # Reglas del taller:
 
 1. Olvida lo que sabes de Angularjs (Angular 1.x)
-
+1
 ![alt text](https://github.com/angie-clau/taller-vp/tree/master/src/assets/img/200w_d.gif)
-
+2
+![alt text][https://raw.githubusercontent.com/angie-clau/taller-vp/master/src/assets/img/200w_d.gif]
+3
+![alt text][https://github.com/angie-clau/taller-vp/blob/master/src/assets/img/200w_d.gif]
 
 2. Angular y React son muy diferentes
 
@@ -11,7 +14,7 @@
 
 # Nuestra super app
 
-![alt text](https://github.com/angie-clau/taller-vp/tree/master/src/assets/img/taller-vp.JPG)
+![alt text](https://github.com/angie-clau/taller-vp/blob/master/src/assets/img/taller-vp.JPG)
 
 
 
