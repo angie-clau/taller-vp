@@ -1,0 +1,17 @@
+{
+    "contactInfo": [
+        {
+            "type": "Phone",
+            "value": "Phone Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        },
+        {
+            "type": "Email",
+            "value": "Email Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        },
+        {
+            "type": "Address",
+            "value": "Address Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        }
+    ],
+    "products": []
+}
