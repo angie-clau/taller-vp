@@ -212,7 +212,7 @@ Antes de entrar en materia con Template Syntax vamos a combiar este HTML en `app
 
 ```
 
-1. interpolacion: funciona como en AngularJs. Con las doble llaves podemos mostrar el contenido de variables de nuestro componente o hacer operaciones.
+1. interpolacion: funcióna como en AngularJs. Con las doble llaves podemos mostrar el contenido de variables de nuestro componente o hacer operaciones.
 
 para verlo vamos a ir a la declaración del componente `app/componets/welcome/welcome.component.ts` y vamos a declarar una variable
 
@@ -300,7 +300,7 @@ en los botones agregamos un evento
 
 puedes crear id de los web components y usar sus propiedades
 
-Agregar la siguiente funcion al componente
+Agregar la siguiente función al componente
 
 ```bash
 showValue (dato) {
@@ -321,7 +321,7 @@ y en el html agregar
     </div>
 </div>
 ```
-### Veanos como funciona las rutas llamando al componente de contacto.
+### Veanos como funcióna las rutas llamando al componente de contacto.
 
 en el componente importamos el router de angular
 
@@ -333,7 +333,7 @@ hacemos referencia a el en el constructor
 ```bash
 constructor(private router: Router) { }
 ```
-creamos la funcion que redirecionara al componente de contacto
+creamos la función que redirecionara al componente de contacto
 
 ```bash
 contact = () => {
@@ -448,7 +448,7 @@ constructor(private router: Router, private fb: FormBuilder) { }
 </div>
 ```
 
-##### Adicionamos la funcion Back()
+##### Adicionamos la función Back()
 
 ```
 back = () => {
@@ -577,7 +577,7 @@ contactContent: any
         });
     }
 ```
-Y llamamos la funcion en `ngOnInit`
+Y llamamos la función en `ngOnInit`
 
 ```
 ngOnInit() {
@@ -942,7 +942,7 @@ subjects: String[] = subjectConst;
 
 >myControl.status: the validity of a FormControl. Possible values: VALID, INVALID, PENDING, or DISABLED.
 
-##### En `contact.component.ts` añadimos la funcion que mostrará u ocultará el div
+##### En `contact.component.ts` añadimos la función que mostrará u ocultará el div
 
 ```
 tempDisplay: boolean = true;
@@ -960,7 +960,7 @@ toggleTempDisplay = () => {
 export const namePattern = "^[a-zA-Z ]*$";
 ```
 
-##### En `contact.component.ts` Adicionamos las validaciones al formulario. En `contact.component.ts` adicionaremos las validaciones
+##### En `contact.component.ts` adicionaremos las validaciones
 
 > Angular provides many validators out of the box. They can be imported along with the rest of dependencies for procedural forms.
 > A FormControl constructor accepts three, optional arguments: the initial data value, an array of validators, and an array of async validators.
@@ -1060,7 +1060,7 @@ submitted = () => {
 }
 ```
 
-##### Enviamos el formulario. En `contact.component.ts` guardamos los datos
+##### Enviando el formulario. En `contact.component.ts` agregamos la función que envia los formularios
 
 >Clicking a button of type "submit" triggers the ngSubmit event which calls the component's onSubmit method
 
@@ -1082,7 +1082,7 @@ resetForm = () => {
 }
 ```
 
-##### En `contact.component.html` creamos la funcion que guardara el formulario
+##### En `contact.component.html` creamos la función que guardará el formulario
 
 ```
 <form novalidate [formGroup]="tallerForm" (ngSubmit)="submitted()">
@@ -1160,7 +1160,7 @@ ngOnInit() {
 }
 ```
 
-##### O tambien podemos escuchar los cambios desde un componente. Refactoricemos nuestras validaciones. En `contact-fields.component.ts` añadiremos lo siguiente:
+##### También podemos escuchar los cambios desde un componente. En `contact-fields.component.ts` añadiremos lo siguiente:
 
 ```
 private _subjects = [];
@@ -1325,5 +1325,7 @@ private _subjects = [];
 
 *`More detail:`*
 
-https://angular.io/guide/lifecycle-hooks#lifecycle-sequence
-https://angular-2-training-book.rangle.io/handout/advanced-components/component_lifecycle.html
+<https://angular.io/guide/lifecycle-hooks#lifecycle-sequence>
+<https://angular-2-training-book.rangle.io/handout/advanced-components/component_lifecycle.html>
+<https://toddmotto.com/angular-2-forms-reactive>
+<https://angular-2-training-book.rangle.io/handout/forms/template-driven/template-driven_forms.html>
