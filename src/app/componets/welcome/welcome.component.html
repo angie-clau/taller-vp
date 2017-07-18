@@ -1,3 +1,52 @@
-<p>
-  welcome works!
-</p>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
+            <h1 class="text-center text-danger">
+                WELCOME
+            </h1>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, perferendis. Saepe aliquid optio itaque
+                eos quo delectus voluptate, reiciendis, deleniti, dolor dolores vel dolorum voluptatum modi adipisci a nobis
+                numquam!
+            </p>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
+            <button (click)="show = true" class="btn btn-primary">
+                    opción 1
+            </button>
+        </div>
+        <div class="col d-flex justify-content-center">
+            <button (click)="show = false" class="btn btn-primary">
+                    opción 2
+            </button>
+        </div>
+    </div>
+    <div class="row mt-5" *ngIf="show; else elseBlock">
+        <div class="col d-flex justify-content-center">
+            <p>1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, perferendis. Saepe aliquid optio itaque
+                eos quo delectus voluptate, reiciendis, deleniti, dolor dolores vel dolorum voluptatum modi adipisci a nobis
+                numquam!
+            </p>
+        </div>
+    </div>
+    <ng-template #elseBlock>
+        <div class="row mt-5">
+            <div class="col d-flex justify-content-center">
+                <p>2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, perferendis. Saepe aliquid optio itaque
+                    eos quo delectus voluptate, reiciendis, deleniti, dolor dolores vel dolorum voluptatum modi adipisci
+                    a nobis numquam!
+                </p>
+            </div>
+        </div>
+    </ng-template>
+    <div>
+        <button (click)="contact()" class="btn btn-danger contact__btn">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>
