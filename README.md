@@ -356,12 +356,12 @@ en el html agregamos el siguiente codigo
 
 We know angular 4 has a Lifecycle Hooks. A component has a lifecycle managed by Angular itself. Angular manages creation, rendering, data-bound properties etc. It also offers hooks that allow us to respond to key lifecycle events.
 
-#### Lifecycle-sequence
+##### Lifecycle-sequence
 
 ![alt text](https://angular.io/generated/images/guide/lifecycle-hooks/hooks-in-sequence.png)
 
 
-#### So, why Reactive Forms?
+##### So, why Reactive Forms?
 
 * Reactive forms is an Angular technique for creating forms in a reactive style
 Favors explicit management of the data flowing: In keeping with the reactive paradigm.
@@ -373,7 +373,7 @@ Favors explicit management of the data flowing: In keeping with the reactive par
 * Using reactive form directives does not require you to follow all reactive priniciples, but it does facilitate the reactive programming approach should you choose to use it.
 
 
-#### Async vs. sync
+##### Async vs. sync
 
 Reactive forms are synchronous. Template-driven forms are asynchronous. It's a difference that matters.
 
@@ -384,11 +384,11 @@ Template-driven forms delegate creation of their form controls to directives. Th
 The asynchrony of template-driven forms also complicates unit testing.
 
 
-#### Which is better, reactive or template-driven?
+##### Which is better, reactive or template-driven?
 
 Neither is "better". They're two different architectural paradigms, with their own strengths and weaknesses. Choose the approach that works best for you. You may decide to use both in the same application.
 
-#### Components and Change Detection Strategies
+##### Components and Change Detection Strategies
 
 By default Angular 1 (Angularjs) implemented two way data binding, the flow of changes was pretty much chaotic, models were able to change directives, directives were able to change models, directives were able to change other directives and models were able to change other models.
 
@@ -399,24 +399,24 @@ changes are guaranteed to propagate unidirectionally. The change detector will t
 
 ![alt text](https://image.slidesharecdn.com/angularjscoreconcepts-160322235139/95/angular-2-core-concepts-35-638.jpg?cb=1458691766)
 
-##### There is a better one called OnPush
+###### There is a better one called OnPush
 
 ![alt text](https://image.slidesharecdn.com/angularjscoreconcepts-160322235139/95/angular-2-core-concepts-39-638.jpg?cb=1458691766)
 
-#### What causes a change detection?
+##### What causes a change detection?
 
 ![alt text](https://image.slidesharecdn.com/angularjscoreconcepts-160322235139/95/angular-2-core-concepts-43-638.jpg?cb=1458691766)
 
 
-#### Let's take advantage of this change detection strategy with Smart and Dumb components
+##### Let's take advantage of this change detection strategy with Smart and Dumb components
 
 ![alt text](https://i.imgur.com/hxusLJ2.png)
 
-### Let's create our app components
+##### Let's create our app components
 
 ![alt text](https://image.slidesharecdn.com/angularjscoreconcepts-160322235139/95/angular-2-core-concepts-8-638.jpg?cb=1458691766)
 
-### En el `contact.component.ts` importamos las librerías a utilizar
+##### En el `contact.component.ts` importamos las librerías a utilizar
 
 > contact.component es un smart component
 
@@ -432,7 +432,7 @@ constructor(private router: Router, private fb: FormBuilder) { }
 ```
 
 
-### Creamos el html con los componentes hijos
+##### Creamos el html con los componentes hijos
 
 ```
  <div class="container-fluid" *ngIf="tallerForm.controls">
@@ -448,7 +448,7 @@ constructor(private router: Router, private fb: FormBuilder) { }
 </div>
 ```
 
-### Adicionamos la funcion Back()
+##### Adicionamos la funcion Back()
 
 ```
 back = () => {
@@ -456,7 +456,7 @@ back = () => {
 }
 ```
 
-### En `contact-info.component.ts` creamos el html que tendrá la info de la empresa
+##### En `contact-info.component.ts` creamos el html que tendrá la info de la empresa
 
 > contact-info.component es un dumb component
 
@@ -478,7 +478,7 @@ back = () => {
 </div>
 ```
 
-### Importamos las librerías que necesitamos
+##### Importamos las librerías que necesitamos
 
 ```
 /*tslint:disable*/
@@ -486,7 +486,7 @@ import { Component, OnInit, Input, SimpleChange } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 ```
 
-### Adicionamos los inputs y el NgOnChange dentro de la clase
+##### Adicionamos los inputs y el NgOnChange dentro de la clase
 
 > @Input Decorator: pass data from parent to child with input binding
 > Detect and act upon changes to input property values with the ngOnChanges() method of the OnChanges lifecycle hook interface
@@ -508,7 +508,7 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
     }
 ```
 
-### Creamos el formulario y añadimos el contact-info.component
+##### Creamos el formulario y añadimos el contact-info.component
 
 ```
     <div class="mt-5">
@@ -521,8 +521,8 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
     </div>
 ```
 
-### Hacemos el llamado al WS.
-### En `taller.service.ts` copiamos y reemplazamos el código que hará el llamado al WS
+##### Hacemos el llamado al WS.
+##### En `taller.service.ts` copiamos y reemplazamos el código que hará el llamado al WS
 
 > The HttpModule is not a core NgModule. HttpModule is Angular's optional approach to web access. It exists as a separate add-on module called @angular/http and is shipped in a separate script file as part of the Angular npm package.
 > The Angular http.get returns an RxJS Observable. Observables are a powerful way to manage asynchronous data flows.
@@ -549,7 +549,7 @@ export class TallerService {
 ```
 
 
-### En `contact.component.ts` importamos el servicio y hacemos el llamado al WS
+##### En `contact.component.ts` importamos el servicio y hacemos el llamado al WS
 > RxJS is The Reactive Extensions for JavaScript
 >...is a set of libraries to compose asynchronous and event-based programs using observable collections and Array#extras style composition in JavaScript
 
@@ -585,7 +585,7 @@ ngOnInit() {
 }
 ```
 
-### Vamos al `contact.component.html` y le enviamos los datos del WS al componente hijo
+##### Vamos al `contact.component.html` y le enviamos los datos del WS al componente hijo
 
 > Passing data from parent to child with input binding
 
@@ -595,7 +595,7 @@ ngOnInit() {
     </div>
 ```
 
-### Vamos al `contact-info.component.html` mostramos el contenido que llega del WS
+##### Vamos al `contact-info.component.html` mostramos el contenido que llega del WS
 
 ```
 <div class="container">
@@ -615,7 +615,7 @@ ngOnInit() {
 </div>
 ```
 
-### Quedando como resultado final:
+##### Quedando como resultado final:
 
 **`contact-info.component.ts`**
 ```
@@ -665,7 +665,7 @@ export class ContactInfoComponent implements OnInit { //ya
 </div>
 ```
 
-### En `contact-fields.component.html` comenzamos a crear el formulario reactivo
+##### En `contact-fields.component.html` comenzamos a crear el formulario reactivo
 
 ```
 <div class="container">
@@ -730,7 +730,7 @@ export class ContactInfoComponent implements OnInit { //ya
 </div>
 ```
 
-### En `contact.component.ts` creamos el modelo del formulario reactivo
+##### En `contact.component.ts` creamos el modelo del formulario reactivo
 
 >In Reactive Forms you create the form control model in code. You write the template with form elements and form... directives from the Angular ReactiveFormsModule. At runtime, Angular binds the template elements to your control model based on your instructions.
 >we need to ensure that the ReactiveFormsModule was imported in the bootstrap phase of the application module.
@@ -764,7 +764,7 @@ ngOnInit() {
 }
 ```
 
-### En `contact.component.ts` creamos el array de opciones para los checkboxes
+##### En `contact.component.ts` creamos el array de opciones para los checkboxes
 
 > Sometimes you need to present an arbitrary number of controls or groups. Use FormArray to present an array of FormGroups
 > To work with a FormArray you do the following:
@@ -800,7 +800,7 @@ createForm = () => {
 > RULE 2: Whenever you find yourself saying something like X has many Y, that is when you should know you are looking at a possible FormArray of Y inside X(where X is almost always a FormGroup).
 
 
-### En `contact.component.ts` vamos a crear el array de opciones para el Subject pero antes creamos una carpeta `Model` y le añadimos un archivo llamado `data-constants.ts`
+##### En `contact.component.ts` vamos a crear el array de opciones para el Subject pero antes creamos una carpeta `Model` y le añadimos un archivo llamado `data-constants.ts`
 
 ```
 export const subjectConst = [
@@ -822,7 +822,7 @@ import { subjectConst, namePattern } from './../../model/data-constants';
 subjects: String[] = subjectConst;
 ```
 
-### En `contact.component.html` añadimos el componente y le enviamos el modelo y los subjects
+##### En `contact.component.html` añadimos el componente y le enviamos el modelo y los subjects
 
 > Passing data from parent to child with input binding
 
@@ -833,7 +833,7 @@ subjects: String[] = subjectConst;
 ```
 
 
-### En `contact-fields.component.ts` recibimos los datos
+##### En `contact-fields.component.ts` recibimos los datos
 
 >Intercept input property changes with a setter
 >Use an input property setter to intercept and act upon a value from the parent.
@@ -862,7 +862,7 @@ subjects: String[] = subjectConst;
     ngOnInit() { }
 ```
 
-### En `contact-fields.component.html` los mostramos
+##### En `contact-fields.component.html` los mostramos
 
 
 ```
@@ -929,7 +929,7 @@ subjects: String[] = subjectConst;
 </div>
 ```
 
-### En `contact.component.html` crearemos un div para visualizar los cambios en el formulario
+##### En `contact.component.html` crearemos un div para visualizar los cambios en el formulario
 
 ```
  <button type="button" class="ml-4 mt-3 btn btn-danger" aria-label="Close" (click)="toggleTempDisplay()">Form Object</button>
@@ -942,7 +942,7 @@ subjects: String[] = subjectConst;
 
 >myControl.status: the validity of a FormControl. Possible values: VALID, INVALID, PENDING, or DISABLED.
 
-### En `contact.component.ts` añadimos la funcion que mostrará u ocultará el div
+##### En `contact.component.ts` añadimos la funcion que mostrará u ocultará el div
 
 ```
 tempDisplay: boolean = true;
@@ -954,13 +954,13 @@ toggleTempDisplay = () => {
 }
 ```
 
-### En `data-constants.ts` adicionamos la expresion regular para restringir el nombre del usuario
+##### En `data-constants.ts` adicionamos la expresion regular para restringir el nombre del usuario
 
 ```
 export const namePattern = "^[a-zA-Z ]*$";
 ```
 
-### En `contact.component.ts` Adicionamos las validaciones al formulario. En `contact.component.ts` adicionaremos las validaciones
+##### En `contact.component.ts` Adicionamos las validaciones al formulario. En `contact.component.ts` adicionaremos las validaciones
 
 > Angular provides many validators out of the box. They can be imported along with the rest of dependencies for procedural forms.
 > A FormControl constructor accepts three, optional arguments: the initial data value, an array of validators, and an array of async validators.
@@ -981,7 +981,7 @@ createForm = () => {
 }
 ```
 
-### En `contact.component.html` adicionaremos los mensajes de error
+##### En `contact.component.html` adicionaremos los mensajes de error
 
 ```
 <div class="container" [formGroup]="parent">
@@ -1060,7 +1060,7 @@ submitted = () => {
 }
 ```
 
-### Enviamos el formulario. En `contact.component.ts` guardamos los datos
+##### Enviamos el formulario. En `contact.component.ts` guardamos los datos
 
 >Clicking a button of type "submit" triggers the ngSubmit event which calls the component's onSubmit method
 
@@ -1082,7 +1082,7 @@ resetForm = () => {
 }
 ```
 
-### En `contact.component.html` creamos la funcion que guardara el formulario
+##### En `contact.component.html` creamos la funcion que guardara el formulario
 
 ```
 <form novalidate [formGroup]="tallerForm" (ngSubmit)="submitted()">
@@ -1090,7 +1090,7 @@ resetForm = () => {
 </form>
 ```
 
-### Cancelando el envío del Form. En `contact-info.component.ts` adicionamos el Output decorator:
+##### Cancelando el envío del Form. En `contact-info.component.ts` adicionamos el Output decorator:
 
 > Output properties expose event producers, such as EventEmitter objects.
 
@@ -1125,13 +1125,13 @@ resetForm = () => {
     }
 ```
 
-### En `contact-info.component.html` adicionamos el evento Click
+##### En `contact-info.component.html` adicionamos el evento Click
 
 ```
 <button type="button" class="btn btn-danger" (click)="onCancel(true)">Cancel</button>
 ```
 
-### En `contact.component.html` recibimos el evento
+##### En `contact.component.html` recibimos el evento
 
 ```
 <form novalidate [formGroup]="tallerForm" (ngSubmit)="submitted()">
@@ -1139,7 +1139,7 @@ resetForm = () => {
 </form>
 ```
 
-### En `contact.component.ts` podemos escuchar los cambios del formulario
+##### En `contact.component.ts` podemos escuchar los cambios del formulario
 
 >Angular calls ngOnChanges when the user updates a control
 >These are properties, such as valueChanges, that return an RxJS Observable. You don't need to know much about RxJS Observable to monitor form control values.
@@ -1160,8 +1160,155 @@ ngOnInit() {
 }
 ```
 
+##### O tambien podemos escuchar los cambios desde un componente. Refactoricemos nuestras validaciones. En `contact-fields.component.ts` añadiremos lo siguiente:
 
-### Accessing Child Component Classes. @ViewChild and @ViewChildren
+```
+private _subjects = [];
+    formErrors = {
+        'name': '',
+        'email': '',
+        'subject': ''
+    };
+
+    validationMessages = {
+        'name': {
+            'required': "Sorry, you can't send the form without your name",
+            'pattern': 'Sorry, only words and spaces'
+        },
+        'email': {
+            'email': 'Please enter a valid email address'
+        },
+        'subject': {
+            'required': "Please select a subject",
+        }
+    };
+
+    constructor() { }
+
+    @Output()
+    cancelled = new EventEmitter<any>();
+
+    @Input()
+    parent: FormGroup;
+
+    @Input()
+    set subjects(subject: string[]) {
+        this._subjects = subject;
+    }
+
+    get subjects(): string[] {
+        return this._subjects;
+    }
+
+    get purpose(): any {
+        return (this.parent.get('purpose') as FormArray).controls;
+    };
+
+    ngOnInit() {
+        this.parent.valueChanges.subscribe(data => this.onValueChanged(data));
+        this.onValueChanged();
+    }
+
+    onValueChanged = (data?: any) => {
+
+        if (!this.parent) { return; }
+
+        const form = this.parent;
+        for (const field in this.formErrors) {
+            this.formErrors[field] = '';
+            const control = form.get(field);
+
+            if (control.dirty && control.hasError('email')) {
+                const messages = this.validationMessages[field];
+                this.formErrors[field] = messages[field];
+            }
+            else if (control && control.dirty && !control.valid) {
+                const messages = this.validationMessages[field];
+                for (const key in control.errors) {
+                    this.formErrors[field] = messages[key];
+                }
+            }
+        }
+    }
+
+    onCancel(event: Event) {
+        this.cancelled.emit(event);
+    } 
+```
+
+##### Y en En `contact-fields.component.html` limpiemos un poco el formulario
+
+```
+<div class="container" [formGroup]="parent">
+    <div class="row mt-5">
+        <div class="col">
+            <h1 class="text-center text-danger">
+                CONTACT US
+            </h1>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <div class="form-group" [class.has-danger]="formErrors.name">
+                <label for="name">Name</label>
+                <input type="text" class="form-control custom-input" name="name" placeholder="Name" formControlName="name">
+                <div class="form-control-feedback" *ngIf="formErrors.name">{{formErrors.name}}</div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group" [class.has-danger]="formErrors.email">
+                <label for="email">Email</label>
+                <input type="email" class="form-control custom-input" name="email" placeholder="Email" formControlName="email">
+                <div class="form-control-feedback" *ngIf="formErrors.email">{{formErrors.email}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <div class="form-group" formArrayName="purpose">
+                <legend class="col-form-legend">What's this all about?</legend>
+                <div class="form-check form-check-inline" *ngFor="let porp of purpose; let i = index;" [formGroupName]="i">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" formControlName="selected">
+                        {{porp.value.name}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group" [class.has-danger]="formErrors.subject">
+                <label for="select">Subject</label>
+                <select class="form-control custom-input" formControlName="subject">
+                    <option value="">Select</option>
+                    <option *ngFor="let sub of subjects; let i = index;" >{{sub}}</option>
+                </select>
+                   <div class="form-control-feedback" *ngIf="formErrors.subject">{{formErrors.subject}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <div class="form-group">
+                <label for="textarea">Message</label>
+                <textarea class="form-control custom-input" name="textarea" rows="3" formControlName="message"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5 pb-5">
+        <div class="col">
+            <div class="text-center">
+                <button type="button" class="btn btn-danger" (click)="onCancel(true)">Cancel</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!parent.valid">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+```
+
+
+
+##### Accessing Child Component Classes. @ViewChild and @ViewChildren
 
 >The @ViewChild and @ViewChildren decorators provide access to the class of child component from the containing component.
 >The @ViewChild is a decorator function that takes the name of a component class as its input and finds its selector in the template of the containing component to bind to. @ViewChild can also be passed a template reference variable.
@@ -1170,7 +1317,7 @@ ngOnInit() {
 <https://embed.plnkr.co/TovrRFke9NrsCKPYE57m/>
 
 
-### Style Guide
+##### Style Guide
 
 <https://angular.io/guide/styleguide>
 

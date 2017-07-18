@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "npm run dev",
-    "dev": "concurrently --kill-others \"npm run json-server\" \"ng serve --proxy-config proxy.conf.json\" ",
+    "dev": "concurrently --kill-others \"npm run json-server\" \"ng serve -o --proxy-config proxy.conf.json\" ",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
