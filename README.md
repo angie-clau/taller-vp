@@ -1,3 +1,8 @@
+
+> # README file in progress. Este código compila con errores. Lo estamos arreglando, muy pronto estará listo y 100% funcional :wink:
+
+
+
 ## Reglas del taller:
 
 1. Angular y React son muy diferentes
