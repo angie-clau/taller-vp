@@ -520,11 +520,11 @@ export class ContactComponent implements OnInit {
         <button type="button" class="close mr-4 closeBtn text-danger" (click)="back()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <!-- ⇣⇣ contact-info.component added ⇣⇣ -->
-        <vp-contact-info></vp-contact-info>
+        <!-- contact-fields Component -->
     </div>
     <div class="mt-5">
-        <!-- contact-info Component -->
+        <!-- ⇣⇣ contact-info.component added ⇣⇣ -->
+        <vp-contact-info></vp-contact-info>
     </div>
 </div>
 ```
@@ -745,8 +745,8 @@ export class TallerModule { }
 
 ```
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class TallerService {
@@ -854,11 +854,11 @@ export class ContactComponent implements OnInit {
         <button type="button" class="close mr-4 closeBtn text-danger" (click)="back()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <!-- ⇣⇣ WS data sent trough Input binding ⇣⇣ -->
-        <vp-contact-info [contactContent]="contactContent"></vp-contact-info>
+        <!-- contact-fields Component -->
     </div>
     <div class="mt-5">
-        <!-- contact-info Component -->
+        <!-- ⇣⇣ WS data sent trough Input binding ⇣⇣ -->
+        <vp-contact-info [contactContent]="contactContent"></vp-contact-info>
     </div>
 </div>
 ```
@@ -961,7 +961,7 @@ export class TallerModule { }
 ```
 
 
-####En `contact.component.html` adicionamos el Formulario y el segundo dumb component: `contact-fields.component.html`
+#### En `contact.component.html` adicionamos el Formulario y el segundo dumb component: `contact-fields.component.html`
 > `contact-info.component` y `contact-fields.component` son dumb components
 
 ```
@@ -970,13 +970,11 @@ export class TallerModule { }
         <button type="button" class="close mr-4 closeBtn text-danger" (click)="back()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <vp-contact-info [contactContent]="contactContent"></vp-contact-info>
+        <!-- ⇣⇣ contact-fields.component added ⇣⇣ -->
+        <vp-contact-fields></vp-contact-fields>
     </div>
     <div class="mt-5">
-        <form novalidate>
-          <!-- ⇣⇣ contact-fields.component added ⇣⇣ -->
-          <vp-contact-fields></vp-contact-fields>
-        </form>
+        <vp-contact-info [contactContent]="contactContent"></vp-contact-info>
     </div>
 </div>
 ```
@@ -1206,13 +1204,13 @@ export class ContactComponent implements OnInit {
         <button type="button" class="close mr-4 closeBtn text-danger" (click)="back()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <vp-contact-info [contactContent]="contactContent"></vp-contact-info>
-    </div>
-    <div class="mt-5">
         <!-- ⇣⇣ register Form within a parent FormGroup  ⇣⇣ -->
         <form novalidate [formGroup]="tallerForm">
             <vp-contact-fields></vp-contact-fields>
          </form>
+    </div>
+    <div class="mt-5">
+        <vp-contact-info [contactContent]="contactContent"></vp-contact-info>
     </div>
 </div>
 ```
@@ -1224,7 +1222,7 @@ export class ContactComponent implements OnInit {
 ```
 /*tslint:disable*/
 import { Component, OnInit, Input } from '@angular/core'; // <--- Add Input symbol to the core import
-import { FormArray } from '@angular/forms'; // <--- Import Reactive Form symbols
+import { FormArray, FormGroup } from '@angular/forms'; // <--- Import Reactive Form symbols
 
 @Component({
     selector: 'vp-contact-fields',
@@ -1270,13 +1268,13 @@ export class ContactFieldsComponent implements OnInit {
         <button type="button" class="close mr-4 closeBtn text-danger" (click)="back()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <vp-contact-info [contactContent]="contactContent"></vp-contact-info>
-    </div>
-    <div class="mt-5">
         <form novalidate [formGroup]="tallerForm">
             <!-- ⇣⇣ sending data: tallerForm and subjects  ⇣⇣ -->
             <vp-contact-fields [parent]="tallerForm" [subjects]="subjects"></vp-contact-fields>
          </form>
+    </div>
+    <div class="mt-5">
+        <vp-contact-info [contactContent]="contactContent"></vp-contact-info>
     </div>
 </div>
 ```
@@ -1447,12 +1445,12 @@ export class ContactComponent implements OnInit {
         <button type="button" class="close mr-4 closeBtn text-danger" (click)="back()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <vp-contact-info [contactContent]="contactContent"></vp-contact-info>
-    </div>
-    <div class="mt-5">
         <form novalidate [formGroup]="tallerForm">
             <vp-contact-fields [parent]="tallerForm" [subjects]="subjects"></vp-contact-fields>
          </form>
+    </div>
+    <div class="mt-5">
+        <vp-contact-info [contactContent]="contactContent"></vp-contact-info>
     </div>
 </div>
 ```
@@ -1627,7 +1625,7 @@ export class ContactComponent implements OnInit {
 ```
 /*tslint:disable*/
 import { Component, OnInit, Input } from '@angular/core';
-import { FormArray } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'vp-contact-fields',
@@ -1787,7 +1785,7 @@ export class ContactFieldsComponent implements OnInit {
 ```
 
 
-##### Enviando el formulario. En `contact.component.ts` agregamos la función que envia los formularios
+##### Enviando el formulario. En `contact.component.ts` agregamos la función que envia y luego limpia el formulario
 >Clicking a button of type "submit" triggers the ngSubmit event which calls the component's onSubmit method
 > The form and data model structures need not match exactly. You often present a subset of the data model on a particular screen. But it makes things easier if the shape of the form model is close to the shape of the data model.
 
@@ -1888,13 +1886,13 @@ export class ContactComponent implements OnInit {
         <button type="button" class="close mr-4 closeBtn text-danger" (click)="back()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <vp-contact-info [contactContent]="contactContent"></vp-contact-info>
-    </div>
-    <div class="mt-5">
         <!-- ⇣⇣ add ngSubmit event ⇣⇣ -->
         <form novalidate [formGroup]="tallerForm" (ngSubmit)="submitted()">
             <vp-contact-fields [parent]="tallerForm" [subjects]="subjects"></vp-contact-fields>
          </form>
+    </div>
+    <div class="mt-5">
+        <vp-contact-info [contactContent]="contactContent"></vp-contact-info>
     </div>
 </div>
 ```
@@ -1907,8 +1905,8 @@ export class ContactComponent implements OnInit {
 
 ```
 /*tslint:disable*/
-import { Component, OnInit, Input, Output } from '@angular/core'; // <---- import Output symbol
-import { FormArray } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'; // <---- import Output and EventEmitter symbols
+import { FormArray, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'vp-contact-fields',
@@ -2079,13 +2077,13 @@ export class ContactFieldsComponent implements OnInit {
         <button type="button" class="close mr-4 closeBtn text-danger" (click)="back()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <vp-contact-info [contactContent]="contactContent"></vp-contact-info>
-    </div>
-    <div class="mt-5">
         <form novalidate [formGroup]="tallerForm" (ngSubmit)="submitted()">
             <!-- ⇣⇣ recieve cancelled event ⇣⇣ -->
             <vp-contact-fields [parent]="tallerForm" [subjects]="subjects" (cancelled)="resetForm($event)"></vp-contact-fields>
          </form>
+    </div>
+    <div class="mt-5">
+        <vp-contact-info [contactContent]="contactContent"></vp-contact-info>
     </div>
 </div>
 ```
