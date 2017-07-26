@@ -6,8 +6,9 @@ import { CommonModule } from '@angular/common';
 import {WelcomeComponent} from './../../componets/welcome/welcome.component';
 import { ContactFieldsComponent } from 'app/componets/contact-fields/contact-fields.component';
 import { ContactInfoComponent } from 'app/componets/contact-info/contact-info.component';
+
+// Containers
 import { ContactComponent } from 'app/containers/contact/contact.component';
-import { TallerService } from 'app/services/taller.service';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { TallerService } from 'app/services/taller.service';
     ContactInfoComponent,
     ContactComponent
   ],
-  providers: [ TallerService ]
+  providers: [ ]
 })
 export class TallerModule { }

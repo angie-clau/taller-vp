@@ -4,8 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 // Modules
-import { TallerModule } from './modules/taller/taller.module';
-import {TallerRoutingModule} from './modules/routing/taller.routing.module';
+import {TallerModule} from './modules/taller/taller.module';
 
 @NgModule({
   declarations: [
@@ -13,10 +12,10 @@ import {TallerRoutingModule} from './modules/routing/taller.routing.module';
   ],
   imports: [
     BrowserModule,
-    TallerModule,
-    TallerRoutingModule
+    TallerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

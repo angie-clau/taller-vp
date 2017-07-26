@@ -1,8 +1,3 @@
-
-> # README file in progress. Este código compila con errores. Lo estamos arreglando, muy pronto estará listo y 100% funcional :wink:
-
-
-
 ## Reglas del taller:
 
 1. Angular y React son muy diferentes
@@ -10,7 +5,6 @@
 2. Olvida lo que sabes de Angularjs (Angular 1.x)
 
 ![alt text](src/assets/img/forget.gif)
-
 
 
 ## Nuestra super app :blush: :thumbsup:
@@ -153,13 +147,13 @@ export class TallerRoutingModule {
 }
 ```
 
-En el `app/app.module.ts` importamos el modulo de las rutas
+En el `app/app.module.ts` importamos el módulo de las rutas
 
 ```bash
 import {TallerRoutingModule} from './modules/routing/taller.routing.module';
 ```
 
-y en la parte de los import de la metadata del modulo agregamos el modulo del routing
+y en la parte de los import de la metadata del módulo agregamos el módulo del routing
 
 ```bash
 imports: [
@@ -171,12 +165,11 @@ imports: [
 
 Ahora, en el componete principal hacemos uso de la directiva del routing para cargar el template según las rutas configuradas.
 
-```
-imports: [
-    BrowserModule,
-    TallerModule,
-    TallerRoutingModule
-  ]
+```bash
+@Component({
+  selector: 'vp-root',
+  template: '<router-outlet></router-outlet>'
+})
 ```
 
 ### Template Syntax
@@ -217,7 +210,7 @@ Antes de entrar en materia con Template Syntax vamos a combiar este HTML en `app
 
 ```
 
-1. interpolacion: funcióna como en AngularJs. Con las doble llaves podemos mostrar el contenido de variables de nuestro componente o hacer operaciones.
+1. interpolacion: funciona como en AngularJs. Con las doble llaves podemos mostrar el contenido de variables de nuestro componente o hacer operaciones.
 
 para verlo vamos a ir a la declaración del componente `app/componets/welcome/welcome.component.ts` y vamos a declarar una variable
 
@@ -326,7 +319,7 @@ y en el html agregar
     </div>
 </div>
 ```
-### Veanos como funcióna las rutas llamando al componente de contacto.
+### Veamos cómo funcionan las rutas llamando al componente de contacto.
 
 en el componente importamos el router de angular
 
@@ -359,65 +352,61 @@ en el html agregamos el siguiente codigo
 
 # Reactive forms and Component Interaction
 
-We know angular 4 has a Lifecycle Hooks. A component has a lifecycle managed by Angular itself. Angular manages creation, rendering, data-bound properties etc. It also offers hooks that allow us to respond to key lifecycle events.
+Sabemos que angular 4 tiene un Lifecycle Hooks. Un componente tiene un ciclo de vida gestionado por Angular mismo. Angular gestiona la creación, el rendering, las propiedades vinculadas a los datos, etc. También ofrece hooks que nos permiten responder a eventos claves del ciclo de vida.
 
-##### Lifecycle-sequence
+### Lifecycle-sequence
 
 ![alt text](https://angular.io/generated/images/guide/lifecycle-hooks/hooks-in-sequence.png)
 
-##### Components and Change Detection Strategies
+### Components and Change Detection Strategies
 
-By default Angular 1 (Angularjs) implemented two way data binding, the flow of changes was pretty much chaotic, models were able to change directives, directives were able to change models, directives were able to change other directives and models were able to change other models.
+Por defecto, Angular 1 (Angularjs) implementó two way data binding, el flujo de cambios fue bastante caótico, los modelos fueron capaces de cambiar las directivas, las directivas fueron capaces de cambiar los modelos, las directivas fueron capaces de cambiar otras directivas y los modelos pudieron cambiar otros modelos.
 
 ![alt text](https://angular-2-training-book.rangle.io/handout/images/angular1-vs-angular2.jpg)
 
-In Angular the flow of information is unidirectional, even when using ngModel to implement two way data binding, which is only syntactic sugar on top of the unidirectional flow.
-changes are guaranteed to propagate unidirectionally. The change detector will traverse each node only once, always starting from the root. That means that a parent component is always checked before its children components.
+En Angular el flujo de información es unidireccional, incluso cuando se utiliza ngModel para implementar two way data binding, que es sólo azúcar sintáctico en la parte superior del flujo unidireccional.
+En Angular se garantiza que los cambios se propagarán unidireccionalmente. El change detector recorrerá cada nodo sólo una vez, siempre partiendo de la raíz. Esto significa que un componente padre siempre se comprueba antes de que sus componentes hijos.
+
 
 ![alt text](https://image.slidesharecdn.com/angularjscoreconcepts-160322235139/95/angular-2-core-concepts-35-638.jpg?cb=1458691766)
 
-###### There is a better one called OnPush
+Hay uno diferente llamado OnPush
 
 ![alt text](https://image.slidesharecdn.com/angularjscoreconcepts-160322235139/95/angular-2-core-concepts-39-638.jpg?cb=1458691766)
 
-##### What causes a change detection?
+**¿Qué causa change detection?**
 
 ![alt text](https://image.slidesharecdn.com/angularjscoreconcepts-160322235139/95/angular-2-core-concepts-43-638.jpg?cb=1458691766)
 
-
-##### Let's take advantage of this change detection strategy with Smart and Dumb components
+**Aprovechemos esta estrategia de change detection e implementando Smart y Dumb componentes**
 
 ![alt text](https://i.imgur.com/hxusLJ2.png)
 
-##### So, why Reactive Forms?
+### Por lo tanto ¿por qué Reactive Forms?
 
-* Reactive forms is an Angular technique for creating forms in a reactive style
-Favors explicit management of the data flowing: In keeping with the reactive paradigm.
+* Reactive forms son una técnica de Angular para crear formularios con un estilo reactivo
+* Favorece el manejo explícito del flujo de datos: De acuerdo con el paradigma reactivo.
+* Con reactive forms, se crea un árbol de controles de formularios de Angular en la clase del componente y se enlazan a los controles nativos del formulario en el template del componente.
+* Una ventaja de trabajar directamente con los controles del formulario es que las actualizaciones de los datos y las validaciones siempre seran sincrónicas y bajo su control.
+* El uso de las directivas de los reactive forms no requiere que se sigan todos los principios reactivos, pero facilita el enfoque de programación reactiva si decide utilizarlo.
 
-* With reactive forms, you create a tree of Angular form control objects in the component class and bind them to native form control elements in the component template.
+**Async vs. sync**
 
-* One advantage of working with form control objects directly is that value and validity updates are always synchronous and under your control.
-
-* Using reactive form directives does not require you to follow all reactive priniciples, but it does facilitate the reactive programming approach should you choose to use it.
-
-
-##### Async vs. sync
-
-Reactive forms are synchronous. Template-driven forms are asynchronous. It's a difference that matters.
-
-In reactive forms, you create the entire form control tree in code.
-
-Template-driven forms delegate creation of their form controls to directives. That means you must wait a tick before manipulating any of the controls from within the component class.
-
-The asynchrony of template-driven forms also complicates unit testing.
+* Los formularios reactivos son síncronos. Template-driven forms son asíncronos. Es una diferencia que importa.
+* En formularios reactivos, se crea todo el árbol de controles de formulario en el código.
+* Template-driven forms delegan la creación de sus controles de formulario a las directivas. Esto significa que se debe esperar una señal antes de poder manipular cualquiera de los controles desde la clase del componente.
+* La asincronía de los Template-driven forms también complica el unit testing.
 
 
-##### Which is better, reactive or template-driven?
+**¿Cuál es mejor?, reactive or template-driven?**
 
-Neither is "better". They're two different architectural paradigms, with their own strengths and weaknesses. Choose the approach that works best for you. You may decide to use both in the same application.
+Ninguno es "mejor". Son dos paradigmas arquitectónicos diferentes, con sus propias fortalezas y debilidades. Elija el enfoque que mejor funcione para usted. Usted puede decidir usar ambos en la misma aplicación.
 
 
-#### Comenzamos adicionando los dumb components al stmart component `contact.component`
+#### Creando componentes
+
+Comenzamos adicionando los dumb componentes al smart component _`contact.component`_
+
 > Smart component: 
 > - Contiene todos los components que no saben qué hacer con sus datos
 > - Pasan los datos a los los hijos
@@ -425,10 +414,11 @@ Neither is "better". They're two different architectural paradigms, with their o
 > - Render child componets
 
 
-##### En el `contact.component.ts` importamos el modulo del router
+En el `contact.component.ts` importamos el módulo del router
+
 > `contact.component` es un smart component
 
-```
+```bash
 /*tslint:disable*/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; // <= router module
@@ -449,9 +439,9 @@ export class ContactComponent implements OnInit {
 ```
 
 
-##### En `contact.component.html` adicionamos los controles que mostraran la información recibida 
+En `contact.component.html` creamos el template que mostrará la información recibida 
 
-```
+```bash
  <div class="container-fluid">
     <div class="mt-5">
         <button type="button" class="close mr-4 closeBtn text-danger" aria-label="Close">
@@ -466,9 +456,9 @@ export class ContactComponent implements OnInit {
 ```
 
 
-##### En `contact.component.ts` Adicionamos la función Back() que nos llevará de vuelta al componente `welcome.component`
+En `contact.component.ts` Adicionamos la función _`back()`_ que nos llevará de vuelta al componente _`welcome.component`_
 
-```
+```bash
 /*tslint:disable*/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -493,12 +483,12 @@ export class ContactComponent implements OnInit {
 ```
 
 
-##### En `contact.component.html` llamamos la función `back()` al hacer click sobre botón en `contact.component.html`
+En `contact.component.html` llamamos la función _`back()`_ al hacer click sobre el botón
 
-```
+```bash
 <div class="container-fluid">
     <div class="mt-5">
-        <!-- ⇣⇣ calling back() on click event ⇣⇣-->
+        <!-- ⇣⇣ calling back() on click ⇣⇣-->
         <button type="button" class="close mr-4 closeBtn text-danger" (click)="back()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -511,10 +501,11 @@ export class ContactComponent implements OnInit {
 ```
 
 
-##### En `contact.component.html` Adicionamos el primer dumb component: `contact-info.component`
-> `contact-info.component` y `contact-fields.component` son dumb components
+En `contact.component.html` Adicionamos el primer component hijo _`contact-info.component`_
 
-```
+> `contact-info.component` es un dumb component
+
+```bash
 <div class="container-fluid">
     <div class="mt-5">
         <button type="button" class="close mr-4 closeBtn text-danger" (click)="back()" aria-label="Close">
@@ -530,15 +521,16 @@ export class ContactComponent implements OnInit {
 ```
 
 
-#### Ahora vamos a adicionar los controles y las funciones que recibiran y emitiran los datos a los dumb components
-> Dumb component: 
+Ahora vamos a adicionar los controles y las funciónes que recibiran y emitiran los datos en los dumb components
+
+> **Dumb component:**
 > - Aceptan datos via Inputs
 > - Emiten datos via Outputs
 
 
-##### En `contact-info.component.html` añadimos los controles que mostrarán el contenido enviado por el smart component
+En `contact-info.component.html` creamos el template que mostrará el contenido enviado por el smart component
 
-```
+```bash
 <div class="container">
     <div class="row mt-5">
         <div class="col">
@@ -556,13 +548,15 @@ export class ContactComponent implements OnInit {
 </div>
 ```
 
-##### En el componente `contact-info.component` vamos a recibir los datos enviados por el smart component con el @Input Decorator
-> Binding to an @Input property: It's called an input property because data flows from the binding expression into the directive. Without that input metadata, Angular rejects the binding;
+En `contact-info.component.ts` vamos a recibir los datos enviados por el smart component con el @Input Decorator
+
+> **Component Interaction: Pasar datos de padres a hijos con input binding**
+> * Binding a una propiedad @Input: Se denomina propiedad de entrada porque los datos fluyen de la expresión de enlace a la directiva. Sin esos metadata de entrada, Angular rechaza el binding;
 
 
-#### Primero importamos los simbolos necesarios del Angular Core y los adicionamos a `contact-info.component.ts`
+En `contact-info.component.ts` importamos los simbolos necesarios del Angular Core
 
-```
+```bash
 /*tslint:disable*/
 import { Component, OnInit, Input, SimpleChange } from '@angular/core'; // <--  Input and SimpleChange symbols added
 
@@ -581,10 +575,11 @@ export class ContactInfoComponent{
 ```
 
 
-#### Añadimos la propiedad Input al `contact-info.component.ts`
-> @Input Decorator adds metadata to the class
+En `contact-info.component.ts` añadimos la propiedad Input 
 
-```
+> @Input Decorator agrega metadata a la clase
+
+```bash
 /*tslint:disable*/
 import { Component, OnInit, Input, SimpleChange } from '@angular/core';
 
@@ -607,11 +602,13 @@ export class ContactInfoComponent{
 ```
 
 
-##### Interceptamos los cambios de la propiedad Input con ngOnChanges() en `contact-info.component.ts`
-> ngOnChanges() of the OnChanges lifecycle hook interface detects and acts upon changes to input property values method 
-> You may prefer this approach to the property setter when watching and interacting with multiple input properties.
+En `contact-info.component.ts` interceptamos los cambios de la propiedad Input con _`ngOnChanges()`_
 
-```
+> *ngOnChanges() del OnChanges lifecycle hook, detecta y actúa sobre los cambios en el método values del input property
+> * Es posible que prefiera este enfoque al property setter cuando se observa e interactúa con varias propiedades Input.
+
+
+```bash
 /*tslint:disable*/
 import { Component, OnInit, Input, SimpleChange } from '@angular/core';
 
@@ -640,9 +637,9 @@ export class ContactInfoComponent{
 ```
 
 
-##### Creamos una variable para almacenar el último valor recibido y la cual mostraremos en los controles
+Creamos una variable _`companyInfo`_ para almacenar el último valor recibido
 
-```
+```bash
 /*tslint:disable*/
 import { Component, OnInit, Input, SimpleChange } from '@angular/core';
 
@@ -673,15 +670,16 @@ export class ContactInfoComponent{
 ```
 
 
-##### Mostramos los datos en `contact-info.component`
-> NgClass and Directives
-> There are two other kinds of Angular directives: components and attribute directives.
-> A component manages a region of HTML in the manner of a native HTML element. Technically it's a directive with a template, like NgFor
-> An attribute directive changes the appearance or behavior of an element, component, or another directive. For example, the built-in NgStyle directive changes several element styles at the same time.
-> You can apply many attribute directives to one host element. You can only apply one structural directive to a host element.
-> Notes how we are using the NgClass to add and remove CSS classes on an HTML element.
+En `contact-info.component.html` mostramos los datos usando directivas de Angular
 
-```
+> **NgClass and Directives**
+> * Existen otros dos tipos de directivas: componentes y attribute directives.
+> * Un componente maneja una región de HTML en la forma de un elemento HTML nativo. Técnicamente es una directiva con un template, como NgFor por ejemplo
+> * Una attribute directive cambia la apariencia o el comportamiento de un elemento, componente u otra directiva. Por ejemplo, la directiva NgStyle cambia varios estilos de elementos al mismo tiempo.
+> * Puede aplicar muchas attribute directives a un elemento host pero sólo se puede aplicar una directiva estructural a un elemento host.
+> * Observa cómo estamos utilizando la clase NgClass para añadir y eliminar clases CSS en un elemento HTML.
+
+```bash
 <div class="container">
     <div class="row mt-5">
         <div class="col" *ngFor="let info of companyInfo; let i = index;">
@@ -700,12 +698,15 @@ export class ContactInfoComponent{
 ```
 
 
-##### Para poder obtener los datos en el smart component debemos crear y llamar el WS. Primero adicionamos el modulo HttpClient al `taller.module.ts`
-> En versione inferiores a Angular 4.3.x se usaba el HttpModule, The HttpModule is not a core NgModule. HttpModule is Angular's optional approach to web access. It exists as a separate add-on module called @angular/http and is shipped in a separate script file as part of the Angular npm package.
-> En este taller usaremos el nuevo HttpClient API. With HttpClient, @angular/common/http provides a simplified API for HTTP functionality for use with Angular applications, building on top of the XMLHttpRequest interface exposed by browsers. Additional benefits of HttpClient include testability support, strong typing of request and response objects, request and response interceptor support, and better error handling via apis based on Observables.
-> Para mayor información sobre la diferencias entre ambos [https://github.com/angular/angular/commit/37797e2]
+Para poder obtener los datos en el smart component debemos crear y llamar el WS. Primero adicionamos el módulo HttpClient al `taller.module.ts`
 
-```
+> En versiones inferiores a Angular 4.3.x se usaba el HttpModule, El módulo HttpModule no es core NgModule. HttpModule es el enfoque opcional de Angular para el acceso a la web. Existe como un módulo add-on separado llamado @angular/http y se envía en un archivo de script separado como parte del paquete Angular npm.
+
+> En este taller usaremos el nuevo HttpClient API. Con HttpClient, @angular/common/http proporciona una API simplificada para la funcionalidad HTTP para ser usada en las aplicaciones de Angular, construyendo sobre el XMLHttpRequest una interfaz expuesta por los navegadores. Las ventajas adicionales de HttpClient incluyen el soporte a pruebas, fuerte typing de los objetos request y response, soporte con el interceptor de la petición y de la respuesta, y mejor manejo de errores vía apis basado en Observables.
+
+> Mayor información sobre la diferencias entre ambos [https://github.com/angular/angular/commit/37797e2]
+
+```bash
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -740,10 +741,11 @@ export class TallerModule { }
 ```
 
 
-##### En `taller.service.ts` Creamos el servicio
-> The Angular http.get returns an RxJS Observable. Observables are a powerful way to manage asynchronous data flows.
+En `taller.service.ts` creamos el servicio
 
-```
+> El http.get de Angular devuelve un RxJS Observable. Los observables son una forma poderosa de administrar los flujos de datos asíncronos.
+
+```bash
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
@@ -760,9 +762,9 @@ export class TallerService {
 ```
 
 
-##### Adicionamos al servio al moudlo del taller en `taller.module.ts`
+En `taller.module.ts` adicionamos el servio al módulo del taller 
 
-```
+```bash
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -801,11 +803,13 @@ export class TallerModule { }
 ```
 
 
-##### En `contact.component.ts` haremos el llamado al WS y escuchamos el resultado
-> RxJS is The Reactive Extensions for JavaScript
->...is a set of libraries to compose asynchronous and event-based programs using observable collections and Array#extras style composition in JavaScript
+En `contact.component.ts` haremos el llamado al WS y escuchamos el resultado
 
-```
+> * RxJS es ls extension reactiva para JavaScript
+> * RxJS es un conjunto de librerías para desarrollar programas asíncronos y basados en eventos utilizando colecciones observables y Array#extras de estilos en JavaScript
+
+
+```bash
 /*tslint:disable*/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -844,11 +848,13 @@ export class ContactComponent implements OnInit {
 ```
 
 
-##### Ahora que ya hicimos el llamado al WS y guardamos los datos, vamos al `contact.component.html` y con el Input binding le enviamos los datos del WS al dumb componente `contact-info.component`
-![alt text](https://angular.io/generated/images/guide/template-syntax/input-output.png)
-> Component Interaction: Passing data from parent to child with input binding
+Ahora que ya hicimos el llamado al WS y guardamos los datos, vamos al `contact.component.html` y con el Input binding le enviamos los datos del WS al dumb componente _`contact-info.component`_
 
-```
+![alt text](https://angular.io/generated/images/guide/template-syntax/input-output.png)
+
+> Component Interaction: psando datos de padres a hijos con input binding
+
+```bash
 <div class="container-fluid">
     <div class="mt-5">
         <button type="button" class="close mr-4 closeBtn text-danger" (click)="back()" aria-label="Close">
@@ -864,7 +870,7 @@ export class ContactComponent implements OnInit {
 ```
 
 
-##### Quedando como resultado final:
+#### Quedando como resultado final:
 
 **`contact-info.component.ts`**
 ```
@@ -916,11 +922,12 @@ export class ContactInfoComponent implements OnInit {
 </div>
 ```
 
-##### Comenzaremos a crear el formulario. En `taller.module.ts` importamos el modulo de ReactiveForms
->we need to ensure that the ReactiveFormsModule was imported in the bootstrap phase of the application module.
->This will give us access to components, directives and providers like FormBuilder, FormGroup, and FormControl
+Comenzaremos a crear el Formulario Reactivo. En `taller.module.ts` importamos el módulo de ReactiveForms
 
-```
+> * Debemos asegurarnos de que el módulo ReactiveFormsModule fue importado en la fase bootstrap del módulo de aplicación.
+> * Esto nos dará acceso a componentes, directivas y providers como FormBuilder, FormGroup y FormControl
+
+```bash
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -961,10 +968,11 @@ export class TallerModule { }
 ```
 
 
-#### En `contact.component.html` adicionamos el Formulario y el segundo dumb component: `contact-fields.component.html`
+En `contact.component.html` adicionamos el Formulario y el segundo dumb component _`contact-fields.component.html`_
+
 > `contact-info.component` y `contact-fields.component` son dumb components
 
-```
+```bash
 <div class="container-fluid">
     <div class="mt-5">
         <button type="button" class="close mr-4 closeBtn text-danger" (click)="back()" aria-label="Close">
@@ -980,15 +988,17 @@ export class TallerModule { }
 ```
 
 
-##### En `contact.component.ts` creamos el modelo de datos del formulario reactivo
->In Reactive Forms you create the form control model in code. You write the template with form elements and form... directives from the Angular ReactiveFormsModule. At runtime, Angular binds the template elements to your control model based on your instructions.
-> Essential form classes are AbstractControl, FormControl, FormGroup, and FormArray
-> **AbstractControl** is the abstract base class for the three concrete form control classes: FormControl, FormGroup, and FormArray. It provides their common behaviors and properties, some of which are observable.
-> **FormControl** tracks the value and validity status of an individual form control. It corresponds to an HTML form control such as an input box or selector.
-> **FormGroup** tracks the value and validity state of a group of AbstractControl instances. The group's properties include its child controls. The top-level form in your component is a FormGroup.
->The FormBuilder class helps reduce repetition and clutter by handling details of control creation for you.
+En `contact.component.ts` creamos el modelo de datos del formulario reactivo
 
-```
+> En los formularios reactivos se crea el modelo de los controles del formulario en el código. Se crea el Template con elementos de formularios y formularios desde el ReactiveFormsModule de Angular. En tiempo de ejecución, Angular vincula los elementos del Template a su modelo de controles basado en sus instrucciones.
+
+> Las clases de formularios esenciales son AbstractControl, FormControl, FormGroup y FormArray
+> * **AbstractControl** es la clase base abstracta para las tres clases concretas de control de formulario: FormControl, FormGroup y FormArray. Proporciona comportamientos y propiedades comunes, algunos de los cuales son observables.
+> * **FormControl** rastrea el valor y el estado de validez de un control individual. Corresponde a un control de formulario HTML, como un input o un select.
+> * **FormGroup** rastrea el valor y el estado de validez de un grupo de instancias de AbstractControl. Las propiedades del grupo incluyen sus controles hijos. El formulario de mayor nivel en un componente es FormGroup.
+> * La clase FormBuilder ayuda a reducir la repetición y el desorden al manejar los detalles de la creación de los controles.
+
+```bash
 /*tslint:disable*/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -1041,16 +1051,19 @@ export class ContactComponent implements OnInit {
 ```
 
 
-##### El campo `Purpose` no es mas que un array de opciones para los checkboxes, en `contact.component.ts` adicionamos la funcion `setPurpose()` que retornará el FormArray
-> Sometimes you need to present an arbitrary number of controls or groups. Use FormArray to present an array of FormGroups
-> **FormArray** tracks the value and validity state of a numerically indexed array of AbstractControl instances.
-> To work with a FormArray you do the following:
-> 1. Define the items (FormControls or FormGroups) in the array.
-> 2. Initialize the array with items created from data in the data model.
-> 3. Add and remove items as the user requires.
-> **FormGroup** tracks the value and validity state of a group of AbstractControl instances. The group's properties include its child controls. The top-level form in your component is a FormGroup.
+El campo _`Purpose`_ no es mas que un array de opciones para los checkboxes, en `contact.component.ts` adicionamos la función _`setPurpose()`_ que creará el FormArray
 
-```
+> A veces es necesario presentar un número arbitrario de controles o grupos. Utilice FormArray para presentar una array de FormGroups
+> * **FormArray** rastrea el valor y el estado de validez de una array numéricamente indexada de instancias de AbstractControl.
+
+> Para trabajar con un FormArray:
+> * Defina los elementos (FormControls o FormGroups) en el array.
+> * Inicialice el array con elementos creados a partir de datos en el modelo de datos.
+> * Adicionar y quitar elementos como el usuario lo requiera.
+> * **FormGroup** rastrea el valor y el estado de validez de un grupo de instancias de AbstractControl. Las propiedades del grupo incluyen sus controles hijos. El formulario de mayor nivel en un componente es FormGroup.
+
+
+```bash
 /*tslint:disable*/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -1111,9 +1124,9 @@ export class ContactComponent implements OnInit {
 ```
 
 
-##### El campo `Subject` es otro array de opciones para el dropdown de Subjects, este array lo vamos a crear en un archivo denomidao `data-constants.ts` que importaremos en nuestro componente. Creamos una carpeta `Model` y le añadimos un archivo llamado `data-constants.ts`. Vamos a `data-constants.ts` y adicionamos el array con los posibles asuntos para el forulario:
+El campo _`Subject`_ es otro array de opciones para el dropdown de Subjects, este array lo vamos a crear en un archivo `data-constants.ts` que importaremos en nuestro componente. Vamos a la carpeta _`Model`_ y le añadimos un archivo llamado `data-constants.ts`. Vamos a `data-constants.ts` y adicionamos el array con los posibles asuntos para el forulario:
 
-```
+```bash
 export const subjectConst = [
     'Better than a pumpkin spice latte',
     'There are no deals in this email',
@@ -1124,9 +1137,9 @@ export const subjectConst = [
 ```
 
 
-#### Luego lo importamos y se lo asignamos a la variable que almacenará el objeto en `contact.component.ts` 
+Luego lo importamos y se lo asignamos a la variable que almacenará el objeto en `contact.component.ts` 
 
-```
+```bash
 /*tslint:disable*/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -1187,18 +1200,20 @@ export class ContactComponent implements OnInit {
 }
 ```
 
-`NOTE`
-> When working with Reactive Forms keep in mind that designing the Form structure is everything
+`NOTA`
+> Cuando se trabajan con Reactive Forms recuerde que el diseño de la estructura del Formulario lo es todo
 
-> RULE 1: Whenever there is a formControl(smallest entity of a form like an input) with any other basic block like FormControl, FormGroup, FormArray. We have to nest them under a FormGroup.
+> **REGLA 1:** Siempre que haya un formControl (entidad más pequeña de un formulario como una input) con cualquier otro bloque básico como un FormControl, FormGroup, FormArray. Tenemos que anidarlos bajo un FormGroup.
 
-> RULE 2: Whenever you find yourself saying something like X has many Y, that is when you should know you are looking at a possible FormArray of Y inside X(where X is almost always a FormGroup).
+> **REGLA 2:** Siempre que te encuentres diciendo algo como X tiene muchos Y, es cuando deberías saber que estás buscando un posible FormArray de Y dentro de X (donde X es casi siempre un FormGroup).
 
 
-##### Una vez creado el modelo de datos debemos registrar el formulario adentro del FormGroup que hemos creado, nos vamos a `contact.component.html` y lo adicionamos
-> Usually, if you have multiple FormControls, you'll want to register them within a parent FormGroup. This is simple to do. To add a FormGroup, add it to the imports section of hero-detail.component.ts:
 
-```
+Una vez creado el modelo de datos debemos registrar el formulario adentro del `FormGroup` que hemos creado, nos vamos a `contact.component.html` y lo adicionamos
+
+> Normalmente, si tienen varios FormControls, se deberá registrarlos en un FormGroup principal
+
+```bash
 <div class="container-fluid">
     <div class="mt-5">
         <button type="button" class="close mr-4 closeBtn text-danger" (click)="back()" aria-label="Close">
@@ -1216,10 +1231,13 @@ export class ContactComponent implements OnInit {
 ```
 
 
-##### Luego de haber creado el modelo y haber registrado el formulario nos comuniacaremos de padre a hijo, por lo tanto vamos a `contact-fields.component.ts` y adicionamos las propiedades que recibiran los datos
-> You can intercept input property changes with a setter. Use this approach to intercept and act upon a value from the parent.
+Luego de haber creado el modelo y haber registrado el formulario nos comuniacaremos de padre a hijo, por lo tanto vamos a `contact-fields.component.ts` y adicionamos las propiedades que recibiran los datos
 
-```
+> Component Interaction: 
+> * Se Pueden interceptar cambios de propiedad input con un setter.
+> * Utilice este método para interceptar y actuar sobre un valor del padre.
+
+```bash
 /*tslint:disable*/
 import { Component, OnInit, Input } from '@angular/core'; // <--- Add Input symbol to the core import
 import { FormArray, FormGroup } from '@angular/forms'; // <--- Import Reactive Form symbols
@@ -1259,10 +1277,11 @@ export class ContactFieldsComponent implements OnInit {
 ```
 
 
-#### Ahora enviamos el modelo de datos y el objecto Subjects con Input binding en `contact.component.html`. 
-> Component Interaction: Passing data from parent to child with input binding
+En `contact.component.html` enviamos el modelo de datos y el objecto Subjects
 
-```
+> Component Interaction: pasando datos desde el padre al hijo con input binding
+
+```bash
 <div class="container-fluid">
     <div class="mt-5">
         <button type="button" class="close mr-4 closeBtn text-danger" (click)="back()" aria-label="Close">
@@ -1280,12 +1299,13 @@ export class ContactFieldsComponent implements OnInit {
 ```
 
 
-####  En `contact-fields.component.html` creamos el template para mostrar los datos del formulario reactivo
-> FormControl is a directive that allows you to create and manage a FormControl instance directly.
-> To let Angular know that there is an input that you want to associate to the name FormControl in the class, you need [formControl]="modelcontrolname" in the template on the html tag.
-> Nesting groups and controls allows you to mirror the hierarchical structure of the data model and helps track validation and state for related sets of controls.
+En `contact-fields.component.html` creamos el template para mostrar los datos del formulario reactivo
 
-```
+> * FormControl es una directiva que le permite crear y administrar directamente una instancia de FormControl.
+> * Para que Angular sepa que hay un input que se desea asociar al nombre FormControl en la clase, se necesita [formControl]="modelcontrolname" en el Template en el tag html.
+> * Nesting grupos y controles permite reflejar la estructura jerárquica del modelo de datos y ayuda a rastrear la validación y el estado de los conjuntos de controles relacionados.
+
+```bash
 <!-- ⇣⇣ register withing parent FormGroup  ⇣⇣ -->
 <div class="container" [formGroup]="parent">
     <div class="row mt-5">
@@ -1358,10 +1378,11 @@ export class ContactFieldsComponent implements OnInit {
 ```
 
 
-##### Inspect FormControl Properties: en Angular tenemos la posibilidad de inspeccionar el formulario. En `contact.component.ts` añadimos la función que mostrará u ocultará el div
-> You can inspect an individual FormControl within a form by extracting it with the .get() method. You can do this within the component class or display it on the page by adding the following to the template, immediately after the {{form.value | json}} interpolation
+En Angular tenemos la posibilidad de inspeccionar las propiedades de un formulario. En `contact.component.ts` haremos eso creando un toggle que nos mostrará u ocultará un div con la información del formulario
 
-```
+> Un FormControl se puede inspeccionar dentro de un formulario extrayéndolo con el método _.get()_. También se puede hacer dentro de la clase del componente o mostrarlo en la página agregando la interpolacion {{form.value | json}}
+
+```bash
 /*tslint:disable*/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -1429,8 +1450,9 @@ export class ContactComponent implements OnInit {
 ```
 
 
-#####  En `contact.component.html` adicionamos los elementos que mostraran los datos del formulario
-> You can also check the validity of a FormControl using tallerForm.status: Possible values: VALID, INVALID, PENDING, or DISABLED.
+En `contact.component.html` adicionamos los tags que mostrarán los datos del formulario
+
+> También puede comprobar la validez de un FormControl usando _`tallerForm.status`_ Los posibles valores son: VALID, INVALID, PENDING, or DISABLED.
 
 ```
 <div class="container-fluid">
@@ -1456,14 +1478,17 @@ export class ContactComponent implements OnInit {
 ```
 
 
-##### Form Validation.
-> Improve overall data quality by validating user input for accuracy and completeness.
+#### Form Validation.
+
+> Mejorar la calidad general de los datos mediante la validación de la información de los usuarios para su exactitud e integridad.
 
 
-#### En este taller haremos 3 tipos de validaciones: required, email and pattern. Para hacer una validacion con una expresion regular lo que haremos será añadirla a nuestro archivo `data-constants.ts` para restringir los caracteres que se ingresan al nombre del usuario
-> Angular provides many validators out of the box. They can be imported along with the rest of dependencies for procedural forms.
 
-```
+En este taller haremos 3 tipos de validaciones: _`required`_, _`email`_ y _`pattern`_. Para hacer una validacion con una expresion regular lo que haremos será añadirla a nuestro archivo `data-constants.ts` para restringir los caracteres que se ingresan al campo que guarda el nombre del usuario
+
+> Angular proporciona muchos validadores por defecto. Se pueden importar junto con el resto de dependencias para los procedural forms.
+
+```bash
 export const subjectConst = [
     'Better than a pumpkin spice latte',
     'There are no deals in this email',
@@ -1476,10 +1501,11 @@ export const namePattern = "^[a-zA-Z ]*$"; // <--- export namePattern constant
 ```
 
 
-##### Vamos a `contact.component.ts` y adicionamos la expresion regular que validara nuestro campo `name`
-> A FormControl constructor accepts three, optional arguments: the initial data value, an array of validators, and an array of async validators.
+Vamos a `contact.component.ts` y adicionamos la expresion regular que validara nuestro campo `name`
 
-```
+> Un FormControl acepta tres argumentos opcionales: el valor de datos inicial, un array de validaciones y un array de validaciones asíncronas.
+
+```bash
 /*tslint:disable*/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -1548,9 +1574,9 @@ export class ContactComponent implements OnInit {
 ```
 
 
-##### Ahora adicionaremos las validaciones required and email type en el modelo del formulario en `contact.component.ts` 
+En `contact.component.ts` adicionamos las validaciones _`required`_ y _`email`_ en el modelo del formulario 
 
-```
+```bash
 /*tslint:disable*/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -1619,10 +1645,11 @@ export class ContactComponent implements OnInit {
 ```
 
 
-##### Una vez adicionadas las validaciones al modelo vamos a tener que mostrar los mensajes de error en el template del formulario, la ventaja de este tipo de formularios es que lo podemos hacer directamente desde la clase del componente y no desde el Html. Para hacer esto lo que haremos será escuchar los cambios de nuestros controles en el componente hijo `contact-fields.component` usando `ngOnChanges`
-> The Angular safe navigation operator (?.) is a fluent and convenient way to guard against null and undefined values in property paths.
+Una vez adicionadas las validaciones al modelo vamos a tener que mostrar los mensajes de error en el template del formulario, la ventaja de este tipo de formularios es que las validaciones las podemos hacer directamente desde la clase del componente y no desde el Html. Para hacer esto lo que haremos será escuchar los cambios de nuestros controles en el componente hijo `contact-fields.component.ts` usando _`ngOnChanges`_
 
-```
+> El operador safe navigation de Angular (?.) Es una manera fluida y conveniente de protegerse contra valores nulos y no definidos en rutas de propiedad.
+
+```bash
 /*tslint:disable*/
 import { Component, OnInit, Input } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
@@ -1705,15 +1732,17 @@ export class ContactFieldsComponent implements OnInit {
 ```
 
 
-#### Despúes de hacer las validaciones en la clase mostraremos y ocultaremos los mensajes en el template `contact-fields.component.html` usando una structural directive como NgIf
-> You can add or remove an element from the DOM by applying an NgIf directive to that element (called the host element). Bind the directive to a condition expression
-> Hiding an element is quite different from removing an element with NgIf.
-> When you hide an element, that element and all of its descendents remain in the DOM. All components for those elements stay in memory and Angular may continue to check for changes. You could be holding onto considerable computing resources and degrading performance, for something the user can't see.
-> When NgIf is false, Angular removes the element and its descendents from the DOM. It destroys their components, potentially freeing up substantial resources, resulting in a more responsive user experience.
-> The show/hide technique is fine for a few elements with few children. You should be wary when hiding large component trees; NgIf may be the safer choice.
-> The ngIf directive is often used to guard against null. Show/hide is useless as a guard. Angular will throw an error if a nested expression tries to access a property of null.
+Despúes de hacer las validaciones en la clase mostraremos y ocultaremos los mensajes en el template `contact-fields.component.html` usando una directiva estructural como NgIf
 
-```
+> * Se puede agregar o quitar elementos del DOM aplicando una directiva NgIf a ese elemento (llamado el elemento host). Vincular la directiva a una expresión de condición
+> * Ocultar un elemento es muy diferente a eliminar un elemento con NgIf.
+> * Cuando se oculta un elemento, ese elemento y todos sus descendientes permanecen en el DOM. Todos los componentes de esos elementos permanecen en la memoria y Angular puede seguir escuchando sus cambios. Se podría estar desperdiciando recursos considerables y disminuyendo el rendimiento por algo que el usuario no puede ver.
+> * Cuando el NgIf es falso, Angular elimina el elemento y sus descendientes del DOM. Destruye sus componentes, potencialmente liberando recursos sustanciales, resultando en una experiencia de usuario más responsable.
+> * La técnica show/hide es buena para algunos elementos con pocos hijos.Sed debe ser cuidadoso al ocultar los árboles de componentes grandes; NgIf puede ser la opción más segura.
+> * La directiva ngIf se utiliza a menudo para proteger contra null. Mostrar/ocultar es inútil contra null. Angular lanzará un error si una expresión anidada intenta tener acceso a una propiedad null.
+
+
+```bash
 <div class="container" [formGroup]="parent">
     <div class="row mt-5">
         <div class="col">
@@ -1785,11 +1814,15 @@ export class ContactFieldsComponent implements OnInit {
 ```
 
 
-##### Enviando el formulario. En `contact.component.ts` agregamos la función que envia y luego limpia el formulario
->Clicking a button of type "submit" triggers the ngSubmit event which calls the component's onSubmit method
-> The form and data model structures need not match exactly. You often present a subset of the data model on a particular screen. But it makes things easier if the shape of the form model is close to the shape of the data model.
+#### Enviando el formulario.
 
-```
+En `contact.component.ts` agregamos la función que envia y luego limpia el formulario
+
+> * Al hacer clic sobre un botón de tipo "submit" se activa el evento ngSubmit que llama al método onSubmit del componente
+> * La estructura del modelo del formulario y de los datos no tienen que coincidir exactamente. A menudo se presenta un subconjunto del modelo de datos en una pantalla en particular. Pero facilita las cosas si la forma del modelo del formulario se parece a la estructura del modelo de datos.
+
+
+```bash
 /*tslint:disable*/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -1873,9 +1906,9 @@ export class ContactComponent implements OnInit {
 ```
 
 
-##### En `contact.component.html` adicionamos el evento ngSubmit que enviará el formulario
+En `contact.component.html` adicionamos el evento ngSubmit que enviará el formulario
 
-```
+```bash
 <div class="container-fluid">
     <button type="button" class="ml-4 mt-3 btn btn-danger" aria-label="Close" (click)="toggleTempDisplay()">Form Object</button>
     <div class="mt-2 formDataDisplay" [hidden]="tempDisplay">
@@ -1898,12 +1931,15 @@ export class ContactComponent implements OnInit {
 ```
 
 
-##### Cancelando el envío del Form: Parent listens for child event. En `contact-fields.component.ts` adicionamos el Output decorator:
-> Output properties expose event producers, such as EventEmitter objects.
-> The child component exposes an EventEmitter property with which it emits events when something happens. The parent binds to that event property and reacts to those events.
-> The child's EventEmitter property is an output property, typically adorned with an @Output decoration 
+#### Cancelando el envío del Form
+En `contact-fields.component.ts` adicionamos el Output decorator:
 
-```
+> **Component interaction, el padre escucha los cambios del hijos**
+> * Las propiedad Output expone a los productores de eventos, como los objetos EventEmitter.
+> * El componente hijo expone una propiedad EventEmitter con la que emite eventos cuando sucede algo. El padre se une a esa propiedad de evento y reacciona a esos eventos.
+> * La propiedad EventEmitter del hijo es una propiedad de salida, normalmente adornada con un @Output decorator
+
+```bash
 /*tslint:disable*/
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'; // <---- import Output and EventEmitter symbols
 import { FormArray, FormGroup } from '@angular/forms';
@@ -1993,9 +2029,9 @@ export class ContactFieldsComponent implements OnInit {
 ```
 
 
-##### En `contact-fields.component.html` adicionamos el evento Click que le informará al padre que el formulario fue cancelado
+En `contact-fields.component.html` adicionamos el evento Click que le informará al padre que el formulario fue cancelado
 
-```
+```bash
 <div class="container" [formGroup]="parent">
     <div class="row mt-5">
         <div class="col">
@@ -2064,9 +2100,9 @@ export class ContactFieldsComponent implements OnInit {
 ```
 
 
-##### En `contact.component.html` recibimos el evento y le asociamos la funcion `resetForm()` que habiamos creado para limpiar los campos del formulario
+En `contact.component.html` recibimos el evento y le asociamos la función _`resetForm()`_ que habíamos creado para limpiar los campos del formulario
 
-```
+```bash
 <div class="container-fluid">
     <button type="button" class="ml-4 mt-3 btn btn-danger" aria-label="Close" (click)="toggleTempDisplay()">Form Object</button>
     <div class="mt-2 formDataDisplay" [hidden]="tempDisplay">
@@ -2087,12 +2123,12 @@ export class ContactFieldsComponent implements OnInit {
     </div>
 </div>
 ```
-##### Tambien tenemos la posibilidad de escuchar los cambios del modelo directamente desde el smart componentEn. Vamos a `contact.component.ts` y adicionamos una funcion que escuchara los cambios
+Tambien tenemos la posibilidad de escuchar los cambios del modelo directamente desde el smart component. En `contact.component.ts` adicionamos una función que escuchará los cambios
 
->Angular calls ngOnChanges when the user updates a control
->These are properties, such as valueChanges, that return an RxJS Observable. You don't need to know much about RxJS Observable to monitor form control values.
+> * Angular llama ngOnChanges cuando el usuario actualiza un control
+> * Estas son propiedades, como valueChanges, que devuelven un RxJS Observable. No es necesario saber mucho sobre RxJS Observable para controlar los valores de control de formulario.
 
-```
+```bash
 /*tslint:disable*/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -2183,24 +2219,23 @@ export class ContactComponent implements OnInit {
 ```
 
 
-##### Accessing Child Component Classes. @ViewChild and @ViewChildren
+#### Accessing Child Component Classes. @ViewChild and @ViewChildren
 
->The @ViewChild and @ViewChildren decorators provide access to the class of child component from the containing component.
->The @ViewChild is a decorator function that takes the name of a component class as its input and finds its selector in the template of the containing component to bind to. @ViewChild can also be passed a template reference variable.
-
+> * Los decoradores @ViewChild y @ViewChildren proporcionan acceso a la clase del componente hijo del componente que lo contiene.
+> * El @ViewChild es una función decorator que toma el nombre de la clase de un componente como su entrada y encuentra su selector en el Template del componente que lo va a enlazar. @ViewChild también se puede usar como una variable de referencia de un Template
 
 <https://embed.plnkr.co/TovrRFke9NrsCKPYE57m/>
 
 
-##### Style Guide
+#### Style Guide
 
 <https://angular.io/guide/styleguide>
 
 
 
-*`More detail:`*
+*`More:`*
 
-<https://angular.io/guide/lifecycle-hooks#lifecycle-sequence>
+<https://angular.io/docs>
 <https://angular-2-training-book.rangle.io/handout/advanced-components/component_lifecycle.html>
 <https://toddmotto.com/angular-2-forms-reactive>
 <https://angular-2-training-book.rangle.io/handout/forms/template-driven/template-driven_forms.html>
