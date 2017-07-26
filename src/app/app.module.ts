@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 
 // Modules
 import {TallerModule} from './modules/taller/taller.module';
+import {TallerRoutingModule} from './modules/routing/taller.routing.module';
 
 @NgModule({
   declarations: [
@@ -12,10 +13,10 @@ import {TallerModule} from './modules/taller/taller.module';
   ],
   imports: [
     BrowserModule,
-    TallerModule
+    TallerModule,
+    TallerRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-
 export class AppModule { }

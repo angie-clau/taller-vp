@@ -1,3 +1,15 @@
-<p>
-  contact-info works!
-</p>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col" *ngFor="let info of companyInfo; let i = index;">
+            <div class="row d-flex justify-content-center icon mb-4">
+                <i class="fa fa-phone text-danger" [class.fa-phone]="info.type === 'Phone'" [class.fa-envelope]="info.type === 'Email'" [class.fa-map-marker]="info.type === 'Address' " aria-hidden="true"></i>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <h3>{{info.type}}</h3>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <p class="info">{{info.value}}</p>
+            </div>
+        </div>
+    </div>
+</div>

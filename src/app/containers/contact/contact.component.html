@@ -1,3 +1,19 @@
-<p>
-  contact works!
-</p>
+<div class="container-fluid" *ngIf="tallerForm.controls">
+    <button type="button" class="ml-4 mt-3 btn btn-danger" aria-label="Close" (click)="toggleTempDisplay()">Form Object</button>
+    <div class="mt-2 formDataDisplay" [hidden]="tempDisplay">
+        <p>Form status: {{tallerForm.status}}</p>
+        <p>Form: {{tallerForm.value | json}}</p>
+    </div>
+    <div class="mt-5">
+        <button type="button" class="close mr-4 closeBtn text-danger" aria-label="Close" (click)="back()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+        <form novalidate [formGroup]="tallerForm" (ngSubmit)="submitted()">
+            <vp-contact-fields [parent]="tallerForm" [subjects]="subjects" (cancelled)="resetForm($event)"></vp-contact-fields>
+        </form>
+    </div>
+    <div class="mt-5">
+        <vp-contact-info [contactContent]="contactContent"></vp-contact-info>
+    </div>
+</div>

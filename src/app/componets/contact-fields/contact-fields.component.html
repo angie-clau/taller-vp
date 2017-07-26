@@ -1,3 +1,64 @@
-<p>
-  contact-fields works!
-</p>
+<div class="container" [formGroup]="parent">
+    <div class="row mt-5">
+        <div class="col">
+            <h1 class="text-center text-danger">
+                CONTACT US
+            </h1>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <div class="form-group" [class.has-danger]="formErrors.name">
+                <label for="name">Name</label>
+                <input type="text" class="form-control custom-input" name="name" placeholder="Name" formControlName="name">
+                <div class="form-control-feedback" *ngIf="formErrors.name">{{formErrors.name}}</div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group" [class.has-danger]="formErrors.email">
+                <label for="email">Email</label>
+                <input type="email" class="form-control custom-input" name="email" placeholder="Email" formControlName="email">
+                <div class="form-control-feedback" *ngIf="formErrors.email">{{formErrors.email}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <div class="form-group" formArrayName="purpose">
+                <legend class="col-form-legend">What's this all about?</legend>
+                <div class="form-check form-check-inline" *ngFor="let porp of purpose; let i = index;" [formGroupName]="i">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" formControlName="selected">
+                        {{porp.value.name}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group" [class.has-danger]="formErrors.subject">
+                <label for="select">Subject</label>
+                <select class="form-control custom-input" formControlName="subject">
+                    <option value="">Select</option>
+                    <option *ngFor="let sub of subjects; let i = index;" >{{sub}}</option>
+                </select>
+                   <div class="form-control-feedback" *ngIf="formErrors.subject">{{formErrors.subject}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <div class="form-group">
+                <label for="textarea">Message</label>
+                <textarea class="form-control custom-input" name="textarea" rows="3" formControlName="message"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5 pb-5">
+        <div class="col">
+            <div class="text-center">
+                <button type="button" class="btn btn-danger" (click)="onCancel(true)">Cancel</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!parent.valid">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
